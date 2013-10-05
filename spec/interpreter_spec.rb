@@ -2,14 +2,14 @@ require 'spec_helper'
 
 describe Interpreter do
   describe "#output" do
-    context "no block sent in creation" do
-      it "returns nil when no phrase is sent to interpreter" do
+    context "when no block message is passed" do
+      it "returns nil" do
         Interpreter.new.output.should be_nil
       end
     end
-    context "block with one subject and one predicated sent" do
-      it "returns a sentence" do
-        sentence = Interpreter.new {
+    context "when a block message is passed" do
+      it "returns a string representation of the message" do
+        sentence = Interpreter.new{
           who("David", "Miguel").feel("awesome", "motivated")
         }.output
         sentence.should == "David y Miguel feel awesome and motivated"

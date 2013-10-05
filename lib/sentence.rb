@@ -1,14 +1,10 @@
 class Sentence
 
-  attr_accessor :subject, :predicates
+  attr_accessor :subject, :verb, :predicate, :expression
 
-  def initialize
-    @subject = Array.new
-    @predicates = Array.new
-  end
-
-  def to_hash
-    @structure
+  def initialize(verb, expression)
+    @verb = verb
+    @expression = expression
   end
 
 end

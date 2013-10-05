@@ -1,44 +1,22 @@
-require './lib/sentence'
-
 class Reader
 
-  attr_reader :sentence
-
-#  class << self
-#
-#    def my_new
-#      instance = allocate
-#      instance.my_initialize()
-#      instance
-#    end
-#
-#    def read(&block)
-#      self.my_new.instance_eval(&block)
-#    end
-#  end
-#
-#  def my_initialize()
-#    @sentence = Sentence.new
-#  end
-
-  def initialize(&block)
-    #self.class.read &block
-    self.class.allocate.instance_eval(&block)
+  class << self
+    def read(&message)
+      self.new.instance_eval(&message)
+    end
   end
 
-  def who *args
-    puts "Who called", args
-    @@subject = args
+  def initialize
+    @@sentence = Hash.new
+  end
+
+  def method_missing(method_id, *args, &block)
+    @@sentence[method_id] = args
     self
   end
 
-  def subject
-    @@subject
-  end
-
-  def feel *args
-    puts "Feel called", args
-    self
+  def output
+    @@sentence
   end
 
 end
