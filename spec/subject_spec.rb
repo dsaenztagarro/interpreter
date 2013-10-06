@@ -5,6 +5,14 @@ describe Subject do
     @singular_subject = Subject.new(["David"])
     @plural_subject = Subject.new(["David", "Miguel"])
   end
+  describe "::new" do
+    it "returns a generic subject when it is not supplied a word" do
+      sentence = double("Sentence")
+      sentence.stub(:first?).and_return(true)
+      subject = Subject.new
+      subject.to_s(sentence).should == "s/he"
+    end
+  end
   describe "#to_s" do
     context "the subject belongs to the first sentence of the message" do
       let(:sentence) { double('Sentence') }

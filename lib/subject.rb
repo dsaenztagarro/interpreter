@@ -3,28 +3,29 @@ class Subject
   attr_accessor :words
 
   def initialize(*words)
-    @words = Array.new(*words)
-    @words = ["s/he"] if words.nil?
+    @words = ["s/he"]
+    @words = Array.new(*words) if not words.nil?
   end
 
   def plural?
     @words.length > 1
   end
 
-  def to_s(sentence)
-    return first_person if sentence.first?
+  def to_s(sentence=nil)
+    return first_person if not sentence.nil? and sentence.first?
     third_person
   end
 
   private
 
   def first_person
-    @words.join(" and ")
+    return @words.join(" and ") if not @words.empty?
+    "s/he"
   end
 
   def third_person
     return "they" if plural?
-    return "s/he"
+    "s/he"
   end
 
 end

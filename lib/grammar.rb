@@ -10,7 +10,7 @@ class Grammar
     return self
   end
 
-  def analize(control_information)
+  def analyze(control_information)
     subject = fetch_subject(control_information)
     @sentences = fetch_valid_sentences(control_information, subject)
     @sentences[0].first = true if @sentences
@@ -31,7 +31,7 @@ class Grammar
     @templates.collect { |t|
       if control_information.key? t.verb
         predicate = control_information[t.verb]
-        Sentence.new(subject, predicate, template)
+        Sentence.new(subject, t.verb, predicate, t.expression)
       end
     }.compact
   end

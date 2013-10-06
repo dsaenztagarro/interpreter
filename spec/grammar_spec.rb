@@ -3,19 +3,20 @@ require 'spec_helper'
 describe Grammar do
   describe "#to" do
     before(:all) do
-      sentences = [
-        Sentence.new("work_at", "work", "<SUBJECT> <VERB> at <PREDICATE>"),
-        Sentence.new("feel", "feel", "<SUBJECT> <VERB> <PREDICATE>"),
-        Sentence.new("shout", "say", "every morning <VERB> '<PREDICATE>'")]
-      dictionary = Dictionary.new(sentences)
+      templates = [
+        Template.new("work_at", "work", "<SUBJECT> <VERB> at <PREDICATE>"),
+        Template.new("feel", "feel", "<SUBJECT> <VERB> <PREDICATE>"),
+        Template.new("shout", "say", "every morning <VERB> '<PREDICATE>'")]
+      dictionary = Dictionary.new(templates)
       @grammar = Grammar.new.apply(dictionary)
     end
+
     context "a block message with a singular subject and one sentence" do
       let(:control_information) {
         Hash["who", ["David"], "work_at", ["Redradix"]]
       }
       it "returns a well written sentence" do
-        sentences = @grammar.to(control_information)
+        sentences = @grammar.analyze(control_information)
         sentences.should == "David works at Redradix"
       end
     end
