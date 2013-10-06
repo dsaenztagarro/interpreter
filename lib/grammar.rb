@@ -13,7 +13,7 @@ class Grammar
   def analyze(control_information)
     subject = fetch_subject(control_information)
     @sentences = fetch_valid_sentences(control_information, subject)
-    @sentences[0].first = true if @sentences
+    @sentences[0].first= true if @sentences
     return self
   end
 
@@ -24,14 +24,15 @@ class Grammar
   private
 
   def fetch_subject(control_information)
-    Subject.new(control_information[:who])
+    Subject.new(control_information["who"])
   end
 
   def fetch_valid_sentences(control_information, subject)
     @templates.collect { |t|
-      if control_information.key? t.verb
-        predicate = control_information[t.verb]
-        Sentence.new(subject, t.verb, predicate, t.expression)
+      if control_information.key? t.key
+        verb = Verb.new(t.verb)
+        predicate = Predicate.new(control_information[t.key])
+        Sentence.new(subject, verb, predicate, t.expression)
       end
     }.compact
   end

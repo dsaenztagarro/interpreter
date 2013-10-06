@@ -14,7 +14,7 @@ describe Subject do
     end
   end
   describe "#to_s" do
-    context "the subject belongs to the first sentence of the message" do
+    context "the first sentence of the message" do
       let(:sentence) { double('Sentence') }
       it "returns a single word" do
         sentence.stub(:first?).and_return(true)
@@ -25,7 +25,7 @@ describe Subject do
         @plural_subject.to_s(sentence).should == "David and Miguel"
       end
     end
-    context "the subject doesnt belong to the first sentence of the message" do
+    context "not the first sentence of the message" do
       let(:sentence) { double('Sentence') }
       it "returns the correct pronoun for a single subject" do
         sentence.stub(:first?).and_return(false)
