@@ -5,27 +5,27 @@ describe Subject do
     @singular_subject = Subject.new(["David"])
     @plural_subject = Subject.new(["David", "Miguel"])
   end
-  describe "#firstPerson" do
-    context "A single word" do
-      it "returns the single word" do
-        @singular_subject.firstPerson.should == "David"
+  describe "#to_s" do
+    context "the subject belongs to the first sentence of the message" do
+      let(:sentence) { double('Sentence') }
+      it "returns a single word" do
+        sentence.stub(:first?).and_return(true)
+        @singular_subject.to_s(sentence).should == "David"
+      end
+      it "returns several words joined by an 'and'" do
+        sentence.stub(:first?).and_return(true)
+        @plural_subject.to_s(sentence).should == "David and Miguel"
       end
     end
-    context "Several words" do
-      it "returns the words joined by an 'and'" do
-        @plural_subject.firstPerson.should == "David and Miguel"
+    context "the subject doesnt belong to the first sentence of the message" do
+      let(:sentence) { double('Sentence') }
+      it "returns the correct pronoun for a single subject" do
+        sentence.stub(:first?).and_return(false)
+        @singular_subject.to_s(sentence).should == "s/he"
       end
-    end
-  end
-  describe "#thirdPerson" do
-    context "A single word" do
-      it "returns the third person" do
-        @singular_subject.thirdPerson.should == "s/he"
-      end
-    end
-    context "Several words" do
-      it "returns the third person" do
-        @plural_subject.thirdPerson.should == "they"
+      it "returns the correct pronoun for a plural subject" do
+        sentence.stub(:first?).and_return(false)
+        @plural_subject.to_s(sentence).should == "they"
       end
     end
   end

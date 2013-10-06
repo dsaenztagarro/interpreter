@@ -1,26 +1,24 @@
 class Sentence
 
-  attr_accessor :subject, :predicate
+  attr_writer :first
 
-  def initialize(subject, predicate, template)
+  def initialize(subject, verb, predicate, expression, first=false)
     @subject = subject
+    @verb = verb
     @predicate = predicate
-    @template = template
+    @expression = expression
+    @first = first
+  end
+
+  def first?
+    @first
   end
 
   def to_s
-    verb = conjugate_verb
-    @template.expression.
-      gsub("<SUBJECT>", subject.to_s).
-      gsub("<VERB>", verb).
-      gsub("<PREDICATE>", predicate.to_s)
-  end
-
-  private
-
-  def conjugate_verb
-    return @template.verb if subject.plural?
-    @template.verb + "s"
+    @expression.
+      gsub("<SUBJECT>", @subject.to_s(self)).
+      gsub("<VERB>", @verb.to_s(@subject)).
+      gsub("<PREDICATE>", @predicate.to_s)
   end
 
 end
