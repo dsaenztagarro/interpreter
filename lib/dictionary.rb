@@ -2,28 +2,20 @@ require 'csv'
 
 class Dictionary
 
-  def initialize
-    load_csv
-  end
+  attr_reader :sentences
 
-  def fetch_valid_sentences(control_information)
-    list = Array.new
-    @sentences.each |s| do
-      if control_information.key? s.verb
-        s.predicates = control_information[s.verb]
-        list << s
-      end
-    end
-    list
+  def initialize(sentences)
+    @sentences = sentences
+    load_csv if not @sentences
   end
 
   private
 
   def load_csv
-    @sentences = Array.new
-    s = CSV.readlines(File.expand_path('../dictionary.csv', File.dirname(__FILE__)))
-    s.each do |row|
-      @sentences << Sentence.new(row[0], row[1])
+    filePath = File.expand_path('../dictionary.csv', File.dirname(__FILE__))
+    @sentences = CSV.readlines(filePath)
+    @sentences.collect! do |row|
+      Sentence.new(row[0], row[1], row[2])
     end
   end
 

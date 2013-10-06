@@ -1,14 +1,12 @@
 require 'spec_helper'
 
 describe Translator do
-  let(:control_information) {
-    { "who" => ["David", "Miguel"], "feel" => ["awesome"]}
-  }
+  let(:translator) { Translator.new }
 
-  describe "::process" do
-    it "returns saves arguments as subject of the phrase" do
-      sentence = Translator.new.translate
-      sentence.should == "David y Miguel feel awesome"
+  describe "::translate" do
+    it "returns a string message" do
+
     end
   end
+
 end

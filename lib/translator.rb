@@ -1,23 +1,13 @@
 class Translator
 
-  attr_accessor :subject, :predicates
-
-  def initialize(dictionary=Dictionary.new)
+  def initialize(dictionary=Dictionary.new, grammar=Grammar.new)
     @dictionary = dictionary
+    @grammar = grammar
   end
 
   def translate(control_information)
-    subject = control_information["who"]
-    vs = @dictionary.fetch_valid_sentences(control_information)
-    build_output(vs)
-  end
-
-  private
-
-  def subject(control_information)
-    control_information.key? "who"
-  def build_output(sentences)
-
+    sentences = @grammar.apply(@dictionary).to(control_information)
+    sentences.map { |sentence| sentence.to_s }.join
   end
 
 end

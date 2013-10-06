@@ -1,19 +1,17 @@
 require 'spec_helper'
 
 describe Sentence do
-  let(:sentence) { Sentence.new }
-
-  describe "#who" do
-    it "saves arguments as subject of the phrase" do
-      sentence.who("David", "Miguel")
-      sentence.subject.should include(["David", "Miguel"])
+  describe "#to_s" do
+    let(:sentence) { Sentence.new(subject, @predicate, @template) }
+    before(:all) do
+      @predicate = Predicate.new ["Redradix"]
+      @template = Template.new("work_at", "work", "<SUBJECT> <VERB> at <PREDICATE>") }
     end
-  end
-
-  describe "#feel" do
-    it "saves arguments as subject of the phrase" do
-      sentence.feel("awesome", "motivated")
-      sentence.predicates.should include(["awesome", "motivated"])
+    context "The first sentence of the message with a singular subject" do
+      let(:subject) { Subject.new ["David"] }
+      it "returns the correct message" do
+        sentence.to_s.should == "David works at Redradix"
+      end
     end
   end
 end
