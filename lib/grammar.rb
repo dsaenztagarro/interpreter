@@ -24,14 +24,16 @@ class Grammar
   private
 
   def fetch_subject(control_information)
-    Subject.new(control_information["who"])
+    words = control_information[:who]
+    words ||= Array.new
+    Subject.new(words)
   end
 
   def fetch_valid_sentences(control_information, subject)
     @templates.collect { |t|
-      if control_information.key? t.key
+      if control_information.key? t.key.to_sym
         verb = Verb.new(t.verb)
-        predicate = Predicate.new(control_information[t.key])
+        predicate = Predicate.new(control_information[t.key.to_sym])
         Sentence.new(subject, verb, predicate, t.expression)
       end
     }.compact

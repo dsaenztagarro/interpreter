@@ -15,7 +15,7 @@ class Dictionary
     filePath = File.expand_path('../dictionary.csv', File.dirname(__FILE__))
     @templates = CSV.readlines(filePath)
     @templates.collect! do |row|
-      Template.new(row[0], row[1], row[2])
+      Template.new(row[0].to_sym, row[1], row[2])
     end
   end
 

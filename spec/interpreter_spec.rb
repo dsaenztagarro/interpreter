@@ -9,10 +9,22 @@ describe Interpreter do
     end
     context "when a block message is passed" do
       it "returns a string representation of the message" do
-        sentence = Interpreter.new{
-          who("David", "Miguel").feel("awesome", "motivated")
-        }.output
-        sentence.should == "David y Miguel feel awesome and motivated"
+        message = "Alejandro and Alej work at Redradix " +
+          "and they feel awesome and motivated " +
+          "and every morning say 'this company rocks!'"
+        Interpreter.new{
+          who("Alejandro", "Alej").feel("awesome", "motivated").work_at("Redradix").shout("this company rocks!")
+        }.output.should == message
+      end
+    end
+    context "when a block message is passed" do
+      it "returns a string representation of the message" do
+        message = "Juan works at Redradix " +
+          "and s/he feels awesome and motivated " +
+          "and every morning says 'this company rocks!'"
+        Interpreter.new{
+          who("Juan").feel("awesome", "motivated").work_at("Redradix").shout("this company rocks!")
+        }.output.should == message
       end
     end
   end

@@ -13,7 +13,7 @@ describe Grammar do
 
     context "a singular subject and one sentence" do
       let(:control_information) {
-        Hash["who", ["David"], "work_at", ["Redradix"]]
+        Hash[:who, ["David"], :work_at, ["Redradix"]]
       }
       it "returns a well written sentence" do
         message = "David works at Redradix"
@@ -22,7 +22,7 @@ describe Grammar do
     end
     context "a plural subject and one sentence" do
       let(:control_information) {
-        Hash["who", ["David", "Miguel"], "work_at", ["Redradix"]]
+        Hash[:who, ["David", "Miguel"], :work_at, ["Redradix"]]
       }
       it "returns a well written sentence" do
         message = "David and Miguel work at Redradix"
@@ -31,8 +31,8 @@ describe Grammar do
     end
     context "a singular subject and multiple sentences" do
       let(:control_information) {
-        Hash["who", ["David"], "feel", ["awesome", "motivated"],
-            "work_at", ["Redradix"], "shout", ["this company rocks!"]]
+        Hash[:who, ["David"], :feel, ["awesome", "motivated"],
+            :work_at, ["Redradix"], :shout, ["this company rocks!"]]
       }
       it "returns a well written sentence" do
         message = "David works at Redradix " +
@@ -43,8 +43,8 @@ describe Grammar do
     end
     context "a plural subject and multiple sentences" do
       let(:control_information) {
-        Hash["who", ["David", "Miguel"], "feel", ["awesome", "motivated"],
-            "work_at", ["Redradix"], "shout", ["this company rocks!"]]
+        Hash[:who, ["David", "Miguel"], :feel, ["awesome", "motivated"],
+            :work_at, ["Redradix"], :shout, ["this company rocks!"]]
       }
       it "returns a well written sentence" do
         message = "David and Miguel work at Redradix " +

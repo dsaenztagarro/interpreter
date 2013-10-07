@@ -6,8 +6,7 @@ class Translator
   end
 
   def translate(control_information)
-    sentences = @grammar.apply(@dictionary).to(control_information)
-    sentences.map { |sentence| sentence.to_s }.join
+    @grammar.apply(@dictionary).analyze(control_information).to_s
   end
 
 end
