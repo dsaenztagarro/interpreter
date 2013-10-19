@@ -1,0 +1,37 @@
+Installation
+============
+
+Command: bundle install
+
+Bundle will install "rspec" dependencies
+
+
+Tests
+=====
+
+Command: "rspec"
+
+
+Execute program
+===============
+
+From root directory: irb
+
+irb-session> require './lib/interpreter.rb'
+
+=> true
+
+irb-session>Interpreter.new { who("David").feel("awesome") }.output
+
+
+Notes
+=====
+
+The file "dictionary.csv" inside the root directory lets you add new domain
+specific "commands". Structure of the file:
+<verb_key>,<verb_inside_the_sentence>,<sentence>
+
+<SUBJECT>, <VERB> and <PREDICATE> are reserved word
+
+IMPORTANT: The order of the rows inside the file defines the order the verbs
+are managed by the interpreter.
