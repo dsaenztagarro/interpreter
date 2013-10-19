@@ -1,3 +1,6 @@
+##
+# This class translates a block message into a system "control information"
+
 class Reader
 
   class << self

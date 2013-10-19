@@ -1,3 +1,7 @@
+##
+# This class filters the system "control information" making
+# use of the dictionary and build the String message
+
 class Grammar
 
   def initialize
@@ -13,7 +17,7 @@ class Grammar
   def analyze(control_information)
     subject = fetch_subject(control_information)
     @sentences = fetch_valid_sentences(control_information, subject)
-    @sentences[0].first= true if @sentences
+    @sentences[0].first= true if @sentences and not @sentences.empty?
     return self
   end
 
